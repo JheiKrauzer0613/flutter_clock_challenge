@@ -131,13 +131,17 @@ import 'dart:async';
                           new Positioned.fill(child: Particles(13)),
                           new Align(
                             alignment: Alignment.topLeft,
-                            child: new Text(
-                              _hourString,
-                              style: new TextStyle(
-                                fontFamily: 'RussoOne',
-                                fontSize: _blockSizeHorizontal * 20.0,
-                                decoration: TextDecoration.none,
-                                color: Colors.white.withOpacity(0.4)
+                            child: new Container(
+                              width: _blockSizeHorizontal * 26.0,
+                              child: new Text(
+                                _hourString,
+                                textAlign: TextAlign.right,
+                                style: new TextStyle(
+                                    fontFamily: 'RussoOne',
+                                    fontSize: _blockSizeHorizontal * 18.0,
+                                    decoration: TextDecoration.none,
+                                    color: Colors.white.withOpacity(0.4)
+                                ),
                               ),
                             ),
                           ),
@@ -169,15 +173,19 @@ import 'dart:async';
                           new Positioned.fill(child: Particles(13)),
                           new Align(
                             alignment: Alignment.bottomRight,
+                            child: new Container(
+                              width: _blockSizeHorizontal * 26.0,
                             child: new Text(
                               _minString,
+                              textAlign: TextAlign.left,
                               style: new TextStyle(
-                                fontFamily: 'RussoOne',
-                                fontSize: _blockSizeHorizontal * 20.0,
-                                decoration: TextDecoration.none,
-                                color: Colors.white.withOpacity(0.4)
+                                  fontFamily: 'RussoOne',
+                                  fontSize: _blockSizeHorizontal * 18.0,
+                                  decoration: TextDecoration.none,
+                                  color: Colors.white.withOpacity(0.4)
                               ),
                             ),
+                          ),
                           ),
                         ],
                       ),
