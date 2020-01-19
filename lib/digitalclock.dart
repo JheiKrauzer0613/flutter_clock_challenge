@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shape_of_view/shape_of_view.dart';
 import 'package:digital_clock_official/particles.dart';
-import 'package:digital_clock_official/screenscale.dart';
 import 'package:digital_clock_official/gradient.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:digital_clock_official/waves.dart';
@@ -14,6 +13,8 @@ import 'dart:async';
   }
 
   class _DigitalClockUIState extends State<DigitalClockUI> {
+    static double _blockSizeHorizontal;
+    static double _blockSizeVertical;
     String _hourString;
     String _minString;
     String _dayString;
@@ -92,6 +93,9 @@ import 'dart:async';
     }
 
     Widget build(BuildContext context) {
+      _blockSizeHorizontal = MediaQuery.of(context).size.width  / 100;
+      _blockSizeVertical = MediaQuery.of(context).size.height  / 100;
+
       onBottom(Widget child) => Positioned.fill(
         child: Align(
           alignment: Alignment.bottomCenter,
@@ -99,80 +103,60 @@ import 'dart:async';
         ),
       );
 
-      SizeConfig().init(context);
-
-      return new Stack(
-        children: <Widget>[
-
-          new Container(
-            width: SizeConfig.screenWidth,
-            height: SizeConfig.screenHeight,
-            color: Colors.white,
-
+      return new Center(
+        child: new AspectRatio(
+            aspectRatio: 5 / 3,
             child: new Stack(
               children: <Widget>[
-
                 new Align(
                   alignment: Alignment.centerLeft,
                   child: new ShapeOfView(
-                    width: SizeConfig.blockSizeHorizontal*51.0,
-                    height: SizeConfig.blockSizeVertical*100.0,
+                    width: MediaQuery.of(context).size.width / 2.3,
                     shape: new DiagonalShape(
-                       position: DiagonalPosition.Right,
-                       direction: DiagonalDirection.Left,
-                       angle: DiagonalAngle.deg(angle: 6.1)
+                      position: DiagonalPosition.Right,
+                      direction: DiagonalDirection.Left,
+                      angle: DiagonalAngle.deg(angle: 4.5)
                     ),
                     child: new AnimatedContainer(
-                      duration: Duration(seconds:2),
+                      duration: Duration(seconds: 2),
                       decoration: new BoxDecoration(
                         gradient: new LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [_bgColor1, _bgColor2]
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [_bgColor1, _bgColor2]
                         ),
                       ),
-                      child: new Container(
-                        child: new Stack(
-                          children: <Widget>[
-                            Positioned.fill(child: Particles(13)),
-                            new Align(
-                              alignment: Alignment.centerLeft,
-                              child: new Container(
-                                height: SizeConfig.blockSizeVertical * 100.0,
-                                width: SizeConfig.blockSizeHorizontal * 30.0,
-                                child: new Align(
-                                  alignment: Alignment.topRight,
-                                  child: new Text(_hourString,
-                                    style: new TextStyle(
-                                      fontFamily: 'RussoOne',
-                                      fontSize: SizeConfig.blockSizeHorizontal* 20.0,
-                                      decoration: TextDecoration.none,
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                  ),
-                                ),
+                      child: new Stack(
+                        children: <Widget>[
+                          new Positioned.fill(child: Particles(13)),
+                          new Align(
+                            alignment: Alignment.topLeft,
+                            child: new Text(
+                              _hourString,
+                              style: new TextStyle(
+                                fontFamily: 'RussoOne',
+                                fontSize: _blockSizeHorizontal * 20.0,
+                                decoration: TextDecoration.none,
+                                color: Colors.white.withOpacity(0.4)
                               ),
                             ),
-                          ],
-                        )
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-
-
                 new Align(
                   alignment: Alignment.centerRight,
                   child: new ShapeOfView(
-                    width: SizeConfig.blockSizeHorizontal*55.0,
-                    height: SizeConfig.blockSizeVertical*100.0,
+                    width: MediaQuery.of(context).size.width / 2.3,
                     shape: new DiagonalShape(
-                        position: DiagonalPosition.Left,
-                        direction: DiagonalDirection.Left,
-                        angle: DiagonalAngle.deg(angle: 6.1)
+                      position: DiagonalPosition.Left,
+                      direction: DiagonalDirection.Left,
+                      angle: DiagonalAngle.deg(angle: 4.5)
                     ),
                     child: new AnimatedContainer(
-                      duration: Duration(seconds:2),
+                      duration: Duration(seconds: 2),
                       decoration: new BoxDecoration(
                         gradient: new LinearGradient(
                             begin: Alignment.topCenter,
@@ -180,100 +164,76 @@ import 'dart:async';
                             colors: [Color(0xffB7F8DB), Color(0xff50A7C2)]
                         ),
                       ),
-                      child: new Container(
-                          child: new Stack(
-                            children: <Widget>[
-                              Positioned.fill(child:Particles(13)),
-                              new Align(
-                                alignment: Alignment.centerRight,
-                                child: new Container(
-                                  height: SizeConfig.blockSizeVertical * 100.0,
-                                  width: SizeConfig.blockSizeHorizontal * 30.0,
-                                  child: new Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: new Text(_minString,
-                                      style: new TextStyle(
-                                        fontFamily: 'RussoOne',
-                                        fontSize: SizeConfig.blockSizeHorizontal* 20.0,
-                                        decoration: TextDecoration.none,
-                                        color: Colors.white.withOpacity(0.3),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                      child: new Stack(
+                        children: <Widget>[
+                          new Positioned.fill(child: Particles(13)),
+                          new Align(
+                            alignment: Alignment.bottomRight,
+                            child: new Text(
+                              _minString,
+                              style: new TextStyle(
+                                fontFamily: 'RussoOne',
+                                fontSize: _blockSizeHorizontal * 20.0,
+                                decoration: TextDecoration.none,
+                                color: Colors.white.withOpacity(0.4)
                               ),
-                            ],
-                          )
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-
-
-                  new Stack(
-                    children: <Widget>[
-
-                      new Align(
-                        alignment: Alignment.bottomCenter,
-                        child: new Container(
-                          height: SizeConfig.screenHeight,
-                          child: new Stack(
-                            children: <Widget>[
-                              onBottom(AnimatedWave(height: 115, speed: 1.0, offset: pi / 2)),
-                              onBottom(AnimatedWave(height: 115, speed: 1.0, offset: pi)),
-                            ],
-                          ),
+                new Stack(
+                  children: <Widget>[
+                    onBottom(AnimatedWave(height: 115, speed: 1.0, offset: pi / 2)),
+                    onBottom(AnimatedWave(height: 115, speed: 1.0, offset: pi)),
+                  ],
+                ),
+                new Center(
+                  child: new Container(
+                    height: _blockSizeVertical * 72.0,
+                    width: _blockSizeHorizontal * 72.0,
+                    decoration: new BoxDecoration(
+                      boxShadow: [
+                        new BoxShadow(
+                          color: Color(0xff202020).withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 10,
                         ),
-                      ),
-
-                      new Center(
-                      child: new Container(
-                        height: SizeConfig.blockSizeVertical * 80.0,
-                        width: SizeConfig.blockSizeHorizontal * 80.0,
-                        decoration: new BoxDecoration(
-                           boxShadow: [new BoxShadow(
-                             color: Color(0xff202020).withOpacity(0.5),
-                             spreadRadius: 2,
-                             blurRadius: 10,
-                           )],
-                           shape: BoxShape.circle,
-                        ),
-                        child: AnimatedBackground(),
-                      ),
-                     ),
-
-                      new Center(
-                        child: new Container(
-                          height: SizeConfig.blockSizeVertical * 70.0,
-                          width: SizeConfig.blockSizeHorizontal * 70.0,
-                          decoration: new BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-                          child: new FlutterAnalogClock(
-                            dateTime: DateTime.now(),
-                            dialPlateColor: Colors.white,
-                            hourHandColor: Color(0xff303030),
-                            minuteHandColor: Color(0xff707070),
-                            secondHandColor: Colors.red,
-                            borderColor: Colors.white,
-                            tickColor: Color(0xff2F80ED),
-                            centerPointColor: Colors.black,
-                            showBorder: true,
-                            showTicks: true,
-                            showMinuteHand: true,
-                            showSecondHand: true,
-                            showNumber: false,
-                            borderWidth: 8.0,
-                            isLive: true,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                      shape: BoxShape.circle,
+                    ),
+                    child: new AnimatedBackground(),
                   ),
+                ),
+                new Center(
+                  child: new Container(
+                    height: _blockSizeVertical * 67.0,
+                    width: _blockSizeHorizontal * 67.0,
+                    decoration: new BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                    child: new FlutterAnalogClock(
+                      dateTime: DateTime.now(),
+                      dialPlateColor: Colors.white,
+                      hourHandColor: Color(0xff303030),
+                      minuteHandColor: Color(0xff707070),
+                      secondHandColor: Colors.red,
+                      borderColor: Colors.white,
+                      tickColor: Color(0xff2F80ED),
+                      centerPointColor: Colors.black,
+                      showBorder: true,
+                      showTicks: true,
+                      showMinuteHand: true,
+                      showSecondHand: true,
+                      showNumber: false,
+                      borderWidth: 8.0,
+                      isLive: true,
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+        ),
       );
     }
   }
-
-  //getCurrentMark(_markNow)
