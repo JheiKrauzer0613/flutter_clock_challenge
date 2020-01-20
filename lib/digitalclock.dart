@@ -195,7 +195,7 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
                               padding: EdgeInsets.only(right: 30.0, top: 20.0),
                               width: _blockSizeHorizontal * 100.0,
                               child: new Text(
-                                'Wednesday',
+                                _dayString,
                                 textAlign: TextAlign.right,
                                 style: new TextStyle(
                                     fontFamily: 'RussoOne',
