@@ -17,7 +17,7 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
   String _hourString;
   String _minString;
   String _dayString;
-  String _marker;
+  String _marker = "";
   Color _bgColor1 = new Color(0xffB7F8DB);
   Color _bgColor2 = new Color(0xff50A7C2);
   int _currHour = 0;
@@ -104,7 +104,6 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
       child: new AspectRatio(
         aspectRatio: 5 / 3,
         child: new Container(
-          color: Colors.black45,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: new Stack(
@@ -135,7 +134,7 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
                                   fontFamily: 'RussoOne',
                                   fontSize: _blockSizeHorizontal * 18.0,
                                   decoration: TextDecoration.none,
-                                  color: Colors.white.withOpacity(0.4)
+                                  color: Colors.white.withOpacity(0.5)
                                 ),
                               ),
                             ),
@@ -150,9 +149,9 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
                                 textAlign: TextAlign.left,
                                 style: new TextStyle(
                                     fontFamily: 'RussoOne',
-                                    fontSize: _blockSizeHorizontal * 6.5,
+                                    fontSize: _blockSizeHorizontal * 6.0,
                                     decoration: TextDecoration.none,
-                                    color: Colors.white.withOpacity(0.4)
+                                    color: Colors.white.withOpacity(0.6)
                                 ),
                               ),
                             ),
@@ -184,7 +183,7 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
                                   fontFamily: 'RussoOne',
                                   fontSize: _blockSizeHorizontal * 18.0,
                                   decoration: TextDecoration.none,
-                                  color: Colors.white.withOpacity(0.4)
+                                  color: Colors.white.withOpacity(0.5)
                                 ),
                               ),
                             ),
@@ -199,9 +198,9 @@ class _DigitalClockUIState extends State<DigitalClockUI> {
                                 textAlign: TextAlign.right,
                                 style: new TextStyle(
                                     fontFamily: 'RussoOne',
-                                    fontSize: _blockSizeHorizontal * 6.5,
+                                    fontSize: _blockSizeHorizontal * 6.0,
                                     decoration: TextDecoration.none,
-                                    color: Colors.white.withOpacity(0.4)
+                                    color: Colors.white.withOpacity(0.6),
                                 ),
                               ),
                             ),
